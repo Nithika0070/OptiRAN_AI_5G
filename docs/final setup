@@ -1,0 +1,29 @@
+python -m venv .venv   #setting up python virtual env
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned  #setting up policy->optional
+.\.venv\Scripts\Activate.ps1    
+
+#installations
+pip install fastapi uvicorn torch joblib pandas scikit-learn python-multipart
+
+#running the main.py file
+python -m src.main --csv data\network_ran_dataset.csv     
+
+#running other sample file
+python -m src.models.energy_efficiency_optimization.train --csv data\network_ran_dataset.csv   
+
+#executing the fast api setup to connect to backend server
+'''
+uvicorn src.api:app --reload    
+
+git bash: curl -X POST "http://127.0.0.1:8000/predict" \
+     -H "accept: application/json" \
+     -H "Content-Type: multipart/form-data" \
+     -F "file=@data/network_ran_dataset.csv"
+
+powershell: Invoke-WebRequest -Uri "http://127.0.0.1:8000/predict" `
+  -Method POST `
+  -Form @{file = Get-Item "data/network_ran_dataset.csv"} `
+  -ContentType "multipart/form-data"
+
+
+'''

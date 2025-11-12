@@ -1,0 +1,14 @@
+{
+  "features": [
+    "traffic_load",
+    "num_users",
+    "average_throughput",
+    "peak_throughput",
+    "signal_strength_dBm",
+    "interference_level_dBm",
+    "energy_consumption_kW",
+    "sleep_mode_enabled",
+    "handover_failures",
+    "latency_ms"
+  ]
+}

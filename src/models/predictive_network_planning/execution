@@ -1,0 +1,15 @@
+'''Install deps (create a venv if you like):
+
+pip install torch scikit-learn joblib pandas numpy
+
+
+Train:
+
+cd src
+python -m models.predictive_network_planning.train --csv data/your_data.csv --out_dir artifacts/planning
+
+
+Predict:
+
+python -m models.predictive_network_planning.predict --csv data/your_data.csv --artifacts artifacts/planning --out_csv predictions.csv
+'''

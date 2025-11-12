@@ -1,0 +1,14 @@
+'''Train
+python -m src.models.energy_efficiency_optimization.train \
+    --csv src/data/your_data.csv \
+    --epochs 20 \
+    --batch_size 64 \
+    --lr 0.001 \
+    --save_path models/energy_efficiency_optimization/best_model.pt
+
+Predict
+python -m src.models.energy_efficiency_optimization.predict \
+    --model_path models/energy_efficiency_optimization/best_model.pt \
+    --csv src/data/your_data.csv \
+    --out output/eeo_predictions.csv
+'''

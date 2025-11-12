@@ -1,0 +1,1 @@
+{"feature_cols": ["traffic_load", "num_users", "average_throughput", "peak_throughput", "signal_strength_dBm", "interference_level_dBm", "energy_consumption_kW", "handover_failures", "latency_ms", "sleep_mode_enabled", "traffic_load_lag1", "traffic_load_lag2", "traffic_load_lag3", "traffic_load_roll3", "traffic_load_roll6"]}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OptiRan 5G</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f7f8fa;
+      text-align: center;
+      padding: 40px;
+    }
+    h2 {
+      color: #0078d7;
+    }
+    form {
+      margin-top: 30px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input[type=file], input[type=submit] {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+    input[type=submit] {
+      background: #0078d7;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    input[type=submit]:hover {
+      background: #005ea0;
+    }
+    #output {
+      margin-top: 30px;
+      text-align: left;
+      display: inline-block;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      width: 100%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background: #0078d7;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>OptiRan 5G</h2>
+  <p>Upload your network dataset CSV to predict network load, optimize resource allocation, and detect anomalies.</p>
+
+  <form id="uploadForm">
+    <input type="file" name="file" accept=".csv" required>
+    <br>
+    <input type="submit" value="Run Optimization">
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const output = document.getElementById("output");
+      output.innerHTML = "<p>⏳ Running prediction pipeline... please wait.</p>";
+
+      try {
+        const res = await fetch("/predict", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          output.innerHTML = `<p style="color:red;">❌ Error: ${data.error}</p><pre>${data.traceback}</pre>`;
+          return;
+        }
+
+        let html = `
+          <h3>✅ Prediction Complete</h3>
+          <p><b>Rows Processed:</b> ${data.rows_processed}</p>
+          <p><b>Output File:</b> ${data.output_file}</p>
+          <h4>📊 Sample Predictions</h4>
+          <table>
+            <thead>
+              <tr>
+                ${Object.keys(data.sample_output[0])
+                  .map((k) => `<th>${k}</th>`)
+                  .join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${data.sample_output
+                .map(
+                  (row) =>
+                    `<tr>${Object.values(row)
+                      .map((v) => `<td>${v}</td>`)
+                      .join("")}</tr>`
+                )
+                .join("")}
+            </tbody>
+          </table>
+        `;
+        output.innerHTML = html;
+
+      } catch (err) {
+        output.innerHTML = `<p style="color:red;">⚠️ Request failed: ${err}</p>`;
+      }
+    });
+  </script>
+
+</body>
+</html>

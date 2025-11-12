@@ -1,0 +1,12 @@
+'''# 1) Train (uses your 1000-row CSV)
+python -m src.models.network_anomaly_detection.train \
+  --data_csv data/ran_metrics.csv \
+  --out_dir models/network_anomaly_detection \
+  --epochs 60 --batch_size 64 --lr 1e-3 --quantile 0.99
+
+# 2) Predict on any CSV with same columns
+python -m src.models.network_anomaly_detection.predict \
+  --data_csv data/ran_metrics.csv \
+  --model_dir models/network_anomaly_detection \
+  --output_csv results/anomaly_scores.csv
+'''

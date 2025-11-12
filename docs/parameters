@@ -1,0 +1,17 @@
+| Parameter                         | Description                            | Used in Module(s)  | Purpose                                               |
+| --------------------------------- | -------------------------------------- | ------------------ | ----------------------------------------------------- |
+| **site_id**                       | Unique cell tower or site identifier   | All                | Used to group predictions per cell site               |
+| **timestamp**                     | Time of measurement (e.g., every hour) | All                | Aligns time-series predictions and feature lags       |
+| **traffic_load**                  | Current network load (Mbps or %)       | PNP, DNO, EEO, NAD | Primary variable for capacity & optimization          |
+| **num_users**                     | Number of active users                 | PNP, DNO, EEO      | Helps estimate demand and power usage                 |
+| **average_throughput**            | Mean throughput per user               | DNO, EEO           | Determines efficiency of channel use                  |
+| **peak_throughput**               | Max achievable rate                    | DNO, EEO           | Used to assess high-demand intervals                  |
+| **signal_strength_dBm**           | Average received signal power          | DNO, NAD           | Lower values → higher interference                    |
+| **interference_level_dBm**        | Average interference power             | DNO, NAD           | Detects congested or noisy bands                      |
+| **energy_consumption_kW**         | Power used by the base station         | EEO                | Optimized in the energy model                         |
+| **sleep_mode_enabled**            | Boolean (true/false) flag              | EEO                | Power saving mechanism indicator                      |
+| **handover_failures**             | Number of failed handovers             | DNO, NAD           | Used in anomaly detection & optimization              |
+| **latency_ms**                    | End-to-end delay                       | DNO, NAD           | Quality metric for optimization and anomaly detection |
+| **optimization_action**           | Ground truth or last policy action     | DNO                | Used as label for DNO classifier                      |
+| **traffic_load_lag1, lag2, lag3** | Previous time step loads               | PNP                | For temporal prediction of next load                  |
+| **traffic_load_roll3, roll6**     | Moving averages                        | PNP                | Capture recent trends and smooth out noise            |

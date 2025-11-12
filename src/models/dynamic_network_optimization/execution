@@ -1,0 +1,12 @@
+'''# 1) Train
+python -m src.models.dynamic_network_optimization.train \
+  --csv src/data/your_dataset.csv \
+  --epochs 25 --batch_size 128 --lr 1e-3 \
+  --save_path models/dynamic_network_optimization/best.pt
+
+# 2) Predict
+python -m src.models.dynamic_network_optimization.predict \
+  --model_path models/dynamic_network_optimization/best.pt \
+  --csv src/data/your_dataset.csv \
+  --out output/dno_predictions.csv
+'''
