@@ -1,4 +1,4 @@
-⚡ OptiRAN AI 5G
+OptiRAN AI 5G
 
 AI-Powered OpenRAN Optimization Suite
 
@@ -12,6 +12,7 @@ It automates critical network decisions such as traffic load prediction, energy 
 This project demonstrates a data-to-decision AI pipeline, showcasing how machine learning can improve telecom network reliability, energy efficiency, and user experience.
 
 Core Modules
+
 🔹 1. Predictive Network Planning (PNP)
 
 Goal: Forecast future network traffic load.
