@@ -45,7 +45,7 @@ Uses an autoencoder to reconstruct normal behavior from KPIs.
 High reconstruction error → potential anomaly.
 Flags anomalies for operator intervention.
 
-📊 Dataset
+Dataset
 
 Input CSV: data/network_ran_dataset.csv
 Columns:
@@ -65,7 +65,7 @@ handover_failures	Count of failed user handovers
 latency_ms	Average network latency
 optimization_action	Network’s actual applied action
 
-🧰 Tech Stack
+Tech Stack
 
 Language: Python
 Framework: FastAPI
@@ -87,8 +87,8 @@ pip install -r requirements.txt
 # 4️⃣ Run API
 uvicorn src.api:app --reload
 
-🖥️ Usage
-🌐 Access the Web Interface
+Usage
+Access the Web Interface
 
 Open your browser and visit:
 👉 http://127.0.0.1:8000
@@ -99,7 +99,7 @@ Swagger UI (API Playground)
 Available at:
 👉 http://127.0.0.1:8000/docs
 
-🧮 Example cURL Command
+Example cURL Command
 curl -X POST "http://127.0.0.1:8000/predict" \
      -H "accept: application/json" \
      -H "Content-Type: multipart/form-data" \
@@ -119,27 +119,7 @@ dno_confidence	Confidence level of decision
 energy_pred_kW	Predicted energy consumption
 anomaly_score	Anomaly likelihood
 is_anomaly	Boolean flag for anomaly detection
-🧱 Architecture Overview
-               ┌─────────────────────────────┐
-               │   Data Preprocessing Layer  │
-               │ (Feature Engineering, Scaling) │
-               └─────────────┬───────────────┘
-                             │
-       ┌─────────────────────┼──────────────────────┐
-       │                     │                      │
-┌──────────────┐     ┌─────────────────┐     ┌───────────────────────┐
-│   PNP Model  │     │  DNO Model      │     │  EEO Model            │
-│ (Traffic Pred)│    │ (Policy Actions)│     │ (Energy Optimization) │
-└──────────────┘     └─────────────────┘     └───────────────────────┘
-                             │
-                        ┌────┴────┐
-                        │  NAD AE │   ← Detect anomalies
-                        └────┬────┘
-                             │
-                    ┌────────┴────────┐
-                    │ Final Results CSV│
-                    └──────────────────┘
 
-🏷️ Acknowledgment
+Acknowledgment
 This project was inspired by the original AI-Powered 5G OpenRAN Optimizer repository.
 Significant modifications and improvements were made for educational and portfolio purposes, maintaining open-source licensing integrity.
